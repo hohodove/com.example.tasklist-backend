@@ -10,3 +10,15 @@
 
 ## note
 - プロジェクトはKtor Project Generator(start.ktor.io)にて作成。(IntelliJ Community版ではKtorプラグインが利用不可のため)
+
+## URL
+```
+http://localhost:8080/
+```
+
+## コマンド
+
+### サービス起動
+```
+./gradlew run
+```
