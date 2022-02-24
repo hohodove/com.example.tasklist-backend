@@ -5,4 +5,4 @@
 - Ktor 1.6.7
 
 ## note
-- プロジェクトはKtor Project Generator(start.ktor.io)にて作成。(IntteliJ Community版ではKtorプラグインがないため)
+- プロジェクトはKtor Project Generator(start.ktor.io)にて作成。(IntelliJ Community版ではKtorプラグインが利用不可のため)
