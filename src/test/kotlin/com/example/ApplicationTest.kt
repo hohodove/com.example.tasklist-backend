@@ -10,7 +10,7 @@ import io.ktor.response.*
 import io.ktor.request.*
 import kotlin.test.*
 import io.ktor.server.testing.*
-import com.example.plugins.*
+import com.example.infrastructure.framework.*
 
 class ApplicationTest {
     @Test
