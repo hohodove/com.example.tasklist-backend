@@ -7,13 +7,13 @@ import com.example.infrastructure.framework.*
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 
-class ApplicationTest {
+class DefaultControllerTest {
     @Test
     fun `ルートパスにアクセスした場合、Hello World!がテキストで返却される`() {
         withTestApplication({ configureRouting() }) {
             handleRequest(HttpMethod.Get, "/").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("Hello World", response.content)
+                assertEquals("Hello World!", response.content)
             }
         }
     }

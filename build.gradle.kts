@@ -23,6 +23,24 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-jackson:$ktor_version")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$ktor_version")
+    implementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+}
+
+tasks{
+    test {
+        // JUnit5を使うための設定
+        useJUnitPlatform()
+
+        testLogging {
+
+            showStandardStreams = true
+
+            events("passed", "skipped", "failed")
+
+            // 例外発生時の出力設定 (TestExceptionFormat)
+            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+        }
+    }
 }
