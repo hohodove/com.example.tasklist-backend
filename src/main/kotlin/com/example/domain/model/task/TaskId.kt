@@ -1,5 +1,6 @@
 package com.example.domain.model.task
 
+import com.example.domain.share.ValueObject
 import java.util.UUID
 
 /**
@@ -7,7 +8,7 @@ import java.util.UUID
  *
  * IDはUUIDv4（64桁）。
  */
-class TaskId private constructor(private val id: String) {
+class TaskId private constructor(private val id: String) : ValueObject<String>(id) {
 
     companion object {
 
@@ -38,5 +39,4 @@ class TaskId private constructor(private val id: String) {
             )
     }
 
-    override fun toString(): String = id
 }

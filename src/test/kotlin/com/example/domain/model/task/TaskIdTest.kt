@@ -1,7 +1,7 @@
 package com.example.domain.model.task
 
-import kotlin.test.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows
 
 internal class TaskIdTest {
@@ -10,10 +10,10 @@ internal class TaskIdTest {
     fun `タスクIDはUUID形式で自動生成できる`() {
 
         val taskId = TaskId.generate()
-        println("generated taskId: ${taskId.toString()}")
+        println("generated taskId: ${taskId.value()}")
 
         val pattern = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}".toRegex()
-        assertTrue(taskId.toString().matches(pattern))
+        assertTrue(taskId.value().matches(pattern))
     }
 
     @Test
@@ -22,7 +22,7 @@ internal class TaskIdTest {
         val taskId = TaskId.valueOf("1234abcd-56ef-78ab-90cd-123456efabcd")
 
         val pattern = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}".toRegex()
-        assertTrue(taskId.toString().matches(pattern))
+        assertTrue(taskId.value().matches(pattern))
     }
 
     @Test
