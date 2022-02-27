@@ -34,13 +34,14 @@ tasks{
         useJUnitPlatform()
 
         testLogging {
-
+            // テスト時の標準出力、標準エラーを出力
             showStandardStreams = true
 
+            // テストケースごとの経過を出力
             events("passed", "skipped", "failed")
 
-            // 例外発生時の出力設定 (TestExceptionFormat)
-            exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+            // 例外発生時の出力設定
+            setExceptionFormat("full")
         }
     }
 }

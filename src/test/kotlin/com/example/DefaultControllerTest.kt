@@ -1,11 +1,12 @@
 package com.example
 
-import io.ktor.http.*
 import kotlin.test.*
+import io.ktor.http.*
 import io.ktor.server.testing.*
 import com.example.infrastructure.framework.*
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import org.junit.jupiter.api.Test
 
 class DefaultControllerTest {
     @Test
