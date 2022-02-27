@@ -1,11 +1,8 @@
 package com.example.domain.model.task
 
-import org.hamcrest.CoreMatchers.equalTo
-import org.hamcrest.MatcherAssert.assertThat
+import kotlin.test.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 internal class TaskIdTest {
 
