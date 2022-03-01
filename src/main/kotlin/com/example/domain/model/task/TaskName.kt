@@ -7,7 +7,7 @@ import com.example.domain.share.ValueObject
  *
  * タスク名は100文字を上限とする。
  */
-class TaskName private constructor(val value: String) : ValueObject<String>(value) {
+class TaskName private constructor(private val value: String) : ValueObject<String>(value) {
 
     companion object {
 
