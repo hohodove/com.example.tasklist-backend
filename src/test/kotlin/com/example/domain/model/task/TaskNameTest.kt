@@ -14,7 +14,7 @@ internal class TaskNameTest {
     }
 
     @Test
-    fun `100文字を超えたタスク名は生成できないこと`() {
+    fun `100文字を超えたタスク名は生成できない`() {
         val taskName = "a".repeat(101)
 
         val error = assertThrows<TaskInvalidRequestException> {
