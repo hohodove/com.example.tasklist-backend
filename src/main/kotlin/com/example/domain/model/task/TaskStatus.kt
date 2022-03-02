@@ -1,6 +1,6 @@
 package com.example.domain.model.task
 
 enum class TaskStatus {
-    TODO,
-    DONE
+    NOT_COMPLETED, // 未完了
+    DONE  // 完了
 }

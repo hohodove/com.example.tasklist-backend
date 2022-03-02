@@ -17,12 +17,11 @@ class DueDate private constructor(private val value: LocalDate) : ValueObject<Lo
          * [value]に設定した値からタスク期限日を作成する。
          *
          * 値はタスク作成日以降の日付が設定可能。
-         * 値を指定しない場合、当日の日付を設定する。
          *
          * @throws TaskInvalidRequestException 条件に違反した日付を設定した場合
          * @return 指定された値を持つタスク期限
          */
-        fun valueOf(value: LocalDate = LocalDate.now()): DueDate = value
+        fun valueOf(value: LocalDate): DueDate = value
             .takeIf { it.isAfter(LocalDate.now().minusDays(1)) }
             ?.let { DueDate(it) }
             ?: throw TaskInvalidRequestException("DueDate($value) must be after today.")
