@@ -3,10 +3,10 @@ package com.example.domain.model.task
 import java.time.LocalDate
 
 class Task private constructor(
-    private val taskId: TaskId,
-    private val taskName: TaskName,
-    private val taskStatus: TaskStatus,
-    private val dueDate: DueDate
+    val taskId: TaskId,
+    val taskName: TaskName,
+    val taskStatus: TaskStatus,
+    val dueDate: DueDate
 ) {
 
     /**
@@ -28,25 +28,41 @@ class Task private constructor(
         /**
          * タスクを作成する。
          *
-         * タスクID、タスク名、タスク状態、タスク期限日が必要。
+         * タスク名、タスク期限日が必要。
          *
-         * タスク状態を省略した場合、未完了状態で作成する。
          * タスク期限日を省略した場合、当日日付が設定される。
          *
          * @return 作成されたタスク
          */
         fun create(
+            taskName: TaskName,
+            dueDate: DueDate = DueDate.valueOf(LocalDate.now())
+        ): Task =
+            Task(
+                TaskId.generate(),
+                taskName,
+                TaskStatus.NOT_COMPLETED,
+                dueDate
+            )
+
+        /**
+         * タスクを再構成する。
+         *
+         * タスクID、タスク名、タスク状態、タスク期限日が必要。
+         *
+         * @return 再構成されたタスク
+         */
+        fun reconstract(
             taskId: TaskId,
             taskName: TaskName,
-            taskStatus: TaskStatus = TaskStatus.NOT_COMPLETED,
-            dueDate: DueDate = DueDate.valueOf(LocalDate.now())
-        ): Task {
-            return Task(
-                taskId,
+            taskStatus: TaskStatus,
+            dueDate: DueDate
+        ): Task =
+            Task(taskId,
                 taskName,
                 taskStatus,
                 dueDate
             )
-        }
+
     }
 }
