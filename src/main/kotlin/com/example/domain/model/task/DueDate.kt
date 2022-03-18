@@ -9,7 +9,7 @@ import java.time.LocalDate
  * タスク期限日はタスク作成当日以降の日付である必要がある。
  * 日付を指定して作成しない場合、タスク期限日は当日を設定する。
  */
-class DueDate private constructor(private val value: LocalDate) : ValueObject<LocalDate>(value) {
+class DueDate private constructor(val value: LocalDate) : ValueObject<LocalDate>(value) {
 
     companion object {
 
@@ -25,5 +25,7 @@ class DueDate private constructor(private val value: LocalDate) : ValueObject<Lo
             .takeIf { it.isAfter(LocalDate.now().minusDays(1)) }
             ?.let { DueDate(it) }
             ?: throw TaskInvalidRequestException("DueDate($value) must be after today.")
+
+        fun reconstract(value: LocalDate): DueDate = DueDate(value)
     }
 }

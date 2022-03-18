@@ -8,7 +8,7 @@ import java.util.UUID
  *
  * IDはUUIDv4（64桁）。
  */
-class TaskId private constructor(private val id: String) : ValueObject<String>(id) {
+class TaskId private constructor(val value: String) : ValueObject<String>(value) {
 
     companion object {
 
@@ -31,9 +31,9 @@ class TaskId private constructor(private val id: String) : ValueObject<String>(i
          * @throws TaskInvalidRequestException 条件に違反した値を指定した場合
          * @return 指定された値を持つタスクID
          */
-        fun valueOf(id: String): TaskId = id
+        fun valueOf(value: String): TaskId = value
             .takeIf { pattern.matches(it) }
-            ?.let { TaskId(id) }
+            ?.let { TaskId(value) }
             ?: throw TaskInvalidRequestException(
                 "Task id must be UUIDv4 format."
             )
