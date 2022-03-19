@@ -12,7 +12,7 @@ interface TaskJdbiRepository : SqlObject {
         from tasks
         where id = :taskId
     """)
-    fun findById(taskId: String): TasksTableRecord
+    fun findById(taskId: String): TasksTableRecord?
 
     @SqlQuery("""
         select * from tasks

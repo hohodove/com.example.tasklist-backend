@@ -13,9 +13,9 @@ class TaskRepositoryImpl : TaskRepository {
         .installPlugins()
     val dao = jdbi.onDemand<TaskJdbiRepository>()
 
-    override fun findById(taskId: TaskId): Task {
+    override fun findById(taskId: TaskId): Task? {
         return dao.findById(taskId.value())
-            .recordToDomain()
+            ?.recordToDomain()
     }
 
     override fun findAll(): List<Task> {

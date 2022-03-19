@@ -8,7 +8,7 @@ import com.example.domain.model.task.TaskId
  */
 interface TaskRepository {
 
-    fun findById(taskId: TaskId): Task
+    fun findById(taskId: TaskId): Task?
 
     fun findAll(): List<Task>
 
