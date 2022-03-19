@@ -2,16 +2,15 @@ package com.example.domain.repository
 
 import com.example.domain.model.task.Task
 import com.example.domain.model.task.TaskId
-import com.example.infrastructure.framework.repository.mapping.TasksTableRecord
 
 /**
- * タスクを操作するためのリポジトリを表現する。
+ * タスクエンティティをもとにDB操作を行うインターフェース。
  */
 interface TaskRepository {
 
-    fun findById(taskId: TaskId): TasksTableRecord
+    fun findById(taskId: TaskId): Task?
 
-    fun findAll(): List<TasksTableRecord>
+    fun findAll(): List<Task>
 
     fun save(task: Task)
 

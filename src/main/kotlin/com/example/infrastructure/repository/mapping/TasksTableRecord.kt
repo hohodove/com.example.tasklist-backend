@@ -1,4 +1,4 @@
-package com.example.infrastructure.framework.repository.mapping
+package com.example.infrastructure.repository.mapping
 
 import com.example.domain.model.task.*
 import org.jdbi.v3.core.mapper.reflect.ColumnName
@@ -26,4 +26,19 @@ data class TasksTableRecord(
             TaskStatus.valueOf(taskStatus),
             DueDate.reconstract(dueDate)
         )
+
+    companion object {
+        /**
+         * エンティティからタスクTBLマッピング用のオブジェクトを生成。
+         *
+         * @return 生成されたタスクTBLマッピング用オブジェクト。
+         */
+        fun domainToRecord(task: Task): TasksTableRecord =
+            TasksTableRecord(
+                task.taskId.value(),
+                task.taskName.value(),
+                task.taskStatus.toString(),
+                task.dueDate.value()
+            )
+    }
 }
