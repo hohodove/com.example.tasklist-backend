@@ -1,4 +1,4 @@
-package com.example.infrastructure.framework.repository
+package com.example.infrastructure.repository
 
 import com.example.domain.model.task.*
 import org.junit.jupiter.api.Test
@@ -7,7 +7,7 @@ import java.time.LocalDate
 
 internal class TaskRepositoryImplTest {
 
-    val taskRepositoryImpl = TaskRepositoryImpl()
+    private val taskRepository = TaskRepositoryImpl()
 
     @Test
     fun `タスクの保存、取得、削除ができる`() {
@@ -25,20 +25,17 @@ internal class TaskRepositoryImplTest {
             DueDate.reconstract(LocalDate.of(2002, 2, 2))
         )
 
-        taskRepositoryImpl.save(task1)
-        taskRepositoryImpl.save(task2)
+        taskRepository.save(task1)
+        taskRepository.save(task2)
+        assertEquals(2, taskRepository.findAll().size)
 
-        assertEquals(2, taskRepositoryImpl.findAll().size)
-
-        val selectedTask = taskRepositoryImpl.findById(task1.taskId)
-            .recordToDomain()
-
+        val selectedTask = taskRepository.findById(task1.taskId)
         assertEquals("タスク１", selectedTask.taskName.value())
 
-        taskRepositoryImpl.remove(task1.taskId)
-        taskRepositoryImpl.remove(task2.taskId)
+        taskRepository.remove(task1.taskId)
+        taskRepository.remove(task2.taskId)
 
-        val tasks = taskRepositoryImpl.findAll()
+        val tasks = taskRepository.findAll()
         assertEquals(0, tasks.size)
     }
 }
