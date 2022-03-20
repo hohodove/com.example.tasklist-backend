@@ -3,7 +3,7 @@ package com.example.infrastructure.repository
 import com.example.domain.model.task.Task
 import com.example.domain.model.task.TaskId
 import com.example.domain.repository.TaskRepository
-import com.example.infrastructure.repository.mapping.TasksTableRecord
+import com.example.infrastructure.repository.dto.TaskRepositoryDto
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.sqlobject.kotlin.onDemand
 
@@ -24,8 +24,8 @@ class TaskRepositoryImpl : TaskRepository {
     }
 
     override fun save(task: Task) {
-        val tasksTableRecord = TasksTableRecord.domainToRecord(task)
-        return dao.insert(tasksTableRecord)
+        val taskRepositoryDto = TaskRepositoryDto.domainToRecord(task)
+        return dao.insert(taskRepositoryDto)
     }
 
     override fun remove(taskId: TaskId) {

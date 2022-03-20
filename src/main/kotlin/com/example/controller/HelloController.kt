@@ -5,6 +5,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 
 fun Route.helloController() {
+
     get("/") {
         call.respondText("Hello World!")
     }

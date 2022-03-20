@@ -15,14 +15,14 @@ internal class TaskRepositoryImplTest {
             TaskId.valueOf("1234abcd-56ef-78ab-90cd-123456efabcd"),
             TaskName.valueOf("タスク１"),
             TaskStatus.NOT_COMPLETED,
-            DueDate.reconstract(LocalDate.of(2001, 1, 1))
+            DueDate.reconstruct(LocalDate.of(2001, 1, 1))
         )
 
         val task2 = Task.reconstract(
             TaskId.valueOf("2345bcde-67fa-89bc-01de-234567fabcde"),
             TaskName.valueOf("タスク２"),
             TaskStatus.NOT_COMPLETED,
-            DueDate.reconstract(LocalDate.of(2002, 2, 2))
+            DueDate.reconstruct(LocalDate.of(2002, 2, 2))
         )
 
         taskRepository.save(task1)

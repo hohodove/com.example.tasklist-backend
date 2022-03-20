@@ -7,5 +7,6 @@ import com.example.controller.*
 fun Application.configureRouting() {
     routing {
         helloController()
+        taskController()
     }
 }
