@@ -24,7 +24,7 @@ data class TaskRepositoryDto(
             TaskId.valueOf(taskId),
             TaskName.valueOf(taskName),
             TaskStatus.valueOf(taskStatus),
-            DueDate.reconstract(dueDate)
+            DueDate.reconstruct(dueDate)
         )
 
     companion object {

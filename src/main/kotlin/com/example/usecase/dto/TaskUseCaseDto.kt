@@ -4,15 +4,15 @@ import com.example.domain.model.task.*
 import java.time.LocalDate
 
 data class TaskUseCaseDto(
-    val id: String?,
+    val id: String? = null,
     val name: String,
-    val status: String?,
-    val duedate: LocalDate
+    val status: String? = null,
+    val duedate: LocalDate? = null
 ) {
 
     fun createDomain(): Task = Task.create(
         TaskName.valueOf(name),
-        DueDate.reconstract(duedate)
+        DueDate.valueOf(duedate)
     )
 
     companion object {
