@@ -1,4 +1,4 @@
-package com.example.infrastructure.repository.mapping
+package com.example.infrastructure.repository.dto
 
 import com.example.domain.model.task.*
 import org.jdbi.v3.core.mapper.reflect.ColumnName
@@ -7,7 +7,7 @@ import java.time.LocalDate
 /**
  * タスクTBLマッピング用のオブジェクト。
  */
-data class TasksTableRecord(
+data class TaskRepositoryDto(
     @ColumnName("id") val taskId: String,
     @ColumnName("name") val taskName: String,
     @ColumnName("status") val taskStatus: String,
@@ -33,12 +33,13 @@ data class TasksTableRecord(
          *
          * @return 生成されたタスクTBLマッピング用オブジェクト。
          */
-        fun domainToRecord(task: Task): TasksTableRecord =
-            TasksTableRecord(
+        fun domainToRecord(task: Task): TaskRepositoryDto =
+            TaskRepositoryDto(
                 task.taskId.value(),
                 task.taskName.value(),
                 task.taskStatus.toString(),
                 task.dueDate.value()
             )
+
     }
 }

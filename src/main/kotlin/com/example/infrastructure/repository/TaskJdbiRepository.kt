@@ -1,6 +1,6 @@
 package com.example.infrastructure.repository
 
-import com.example.infrastructure.repository.mapping.TasksTableRecord
+import com.example.infrastructure.repository.dto.TaskRepositoryDto
 import org.jdbi.v3.sqlobject.SqlObject
 import org.jdbi.v3.sqlobject.statement.SqlQuery
 import org.jdbi.v3.sqlobject.statement.SqlUpdate
@@ -12,23 +12,23 @@ interface TaskJdbiRepository : SqlObject {
         from tasks
         where id = :taskId
     """)
-    fun findById(taskId: String): TasksTableRecord?
+    fun findById(taskId: String): TaskRepositoryDto?
 
     @SqlQuery("""
         select * from tasks
     """)
-    fun findAll(): List<TasksTableRecord>
+    fun findAll(): List<TaskRepositoryDto>
 
     @SqlUpdate("""
         insert
         into tasks 
-        values (:tasksTableRecord.taskId,
-                :tasksTableRecord.taskName,
-                :tasksTableRecord.taskStatus,
-                :tasksTableRecord.dueDate
+        values (:taskRepositoryDto.taskId,
+                :taskRepositoryDto.taskName,
+                :taskRepositoryDto.taskStatus,
+                :taskRepositoryDto.dueDate
                 )
     """)
-    fun insert(tasksTableRecord: TasksTableRecord)
+    fun insert(taskRepositoryDto: TaskRepositoryDto)
 
     @SqlUpdate("""
         delete
