@@ -1,5 +1,9 @@
-package com.example.domain.model.task
+package com.example.domain.model.task.entity
 
+import com.example.domain.model.task.value_object.DueDate
+import com.example.domain.model.task.value_object.TaskId
+import com.example.domain.model.task.value_object.TaskName
+import com.example.domain.model.task.value_object.TaskStatus
 import java.time.LocalDate
 
 class Task private constructor(

@@ -1,7 +1,7 @@
 package com.example.infrastructure.repository
 
-import com.example.domain.model.task.Task
-import com.example.domain.model.task.TaskId
+import com.example.domain.model.task.entity.Task
+import com.example.domain.model.task.value_object.TaskId
 import com.example.domain.repository.TaskRepository
 import com.example.infrastructure.repository.dto.TaskRepositoryDto
 import org.jdbi.v3.core.Jdbi

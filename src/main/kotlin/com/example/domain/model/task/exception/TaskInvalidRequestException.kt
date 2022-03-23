@@ -1,4 +1,4 @@
-package com.example.domain.model.task
+package com.example.domain.model.task.exception
 
 /**
  * 無効なリクエストを受け、タスクのドメインモデルへの変換に失敗した場合に発生する例外。

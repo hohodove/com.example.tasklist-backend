@@ -1,5 +1,6 @@
-package com.example.domain.model.task
+package com.example.domain.model.task.value_object
 
+import com.example.domain.model.task.exception.TaskInvalidRequestException
 import com.example.domain.share.ValueObject
 import java.util.UUID
 

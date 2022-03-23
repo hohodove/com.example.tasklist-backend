@@ -1,6 +1,8 @@
 package com.example.usecase.dto
 
-import com.example.domain.model.task.*
+import com.example.domain.model.task.value_object.DueDate
+import com.example.domain.model.task.entity.Task
+import com.example.domain.model.task.value_object.TaskName
 import java.time.LocalDate
 
 data class TaskUseCaseDto(

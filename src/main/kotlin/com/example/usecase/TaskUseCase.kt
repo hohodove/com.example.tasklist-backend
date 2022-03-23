@@ -1,6 +1,6 @@
 package com.example.usecase
 
-import com.example.domain.model.task.TaskId
+import com.example.domain.model.task.value_object.TaskId
 import com.example.infrastructure.repository.TaskRepositoryImpl
 import com.example.usecase.dto.TaskUseCaseDto
 
