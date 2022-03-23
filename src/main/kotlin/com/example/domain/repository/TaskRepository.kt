@@ -1,7 +1,7 @@
 package com.example.domain.repository
 
-import com.example.domain.model.task.Task
-import com.example.domain.model.task.TaskId
+import com.example.domain.model.task.entity.Task
+import com.example.domain.model.task.value_object.TaskId
 
 /**
  * タスクエンティティをもとにDB操作を行うインターフェース。

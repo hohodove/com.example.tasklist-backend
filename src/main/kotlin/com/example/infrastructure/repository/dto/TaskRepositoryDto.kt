@@ -1,6 +1,10 @@
 package com.example.infrastructure.repository.dto
 
-import com.example.domain.model.task.*
+import com.example.domain.model.task.value_object.DueDate
+import com.example.domain.model.task.entity.Task
+import com.example.domain.model.task.value_object.TaskId
+import com.example.domain.model.task.value_object.TaskName
+import com.example.domain.model.task.value_object.TaskStatus
 import org.jdbi.v3.core.mapper.reflect.ColumnName
 import java.time.LocalDate
 
@@ -20,7 +24,7 @@ data class TaskRepositoryDto(
      * @return 生成されたタスク。
      */
     fun recordToDomain(): Task =
-        Task.reconstract(
+        Task.reconstruct(
             TaskId.valueOf(taskId),
             TaskName.valueOf(taskName),
             TaskStatus.valueOf(taskStatus),

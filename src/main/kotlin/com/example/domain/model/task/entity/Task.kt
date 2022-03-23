@@ -1,5 +1,9 @@
-package com.example.domain.model.task
+package com.example.domain.model.task.entity
 
+import com.example.domain.model.task.value_object.DueDate
+import com.example.domain.model.task.value_object.TaskId
+import com.example.domain.model.task.value_object.TaskName
+import com.example.domain.model.task.value_object.TaskStatus
 import java.time.LocalDate
 
 class Task private constructor(
@@ -8,20 +12,6 @@ class Task private constructor(
     val taskStatus: TaskStatus,
     val dueDate: DueDate
 ) {
-
-    /**
-     * タスク状態を完了にする。
-     *
-     * @return タスク状態が完了となったタスク
-     */
-    fun done(): Task {
-        return Task(
-            taskId,
-            taskName,
-            TaskStatus.DONE,
-            dueDate
-        )
-    }
 
     companion object {
 
@@ -52,7 +42,7 @@ class Task private constructor(
          *
          * @return 再構成されたタスク
          */
-        fun reconstract(
+        fun reconstruct(
             taskId: TaskId,
             taskName: TaskName,
             taskStatus: TaskStatus,
