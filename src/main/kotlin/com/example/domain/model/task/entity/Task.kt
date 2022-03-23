@@ -13,20 +13,6 @@ class Task private constructor(
     val dueDate: DueDate
 ) {
 
-    /**
-     * タスク状態を完了にする。
-     *
-     * @return タスク状態が完了となったタスク
-     */
-    fun done(): Task {
-        return Task(
-            taskId,
-            taskName,
-            TaskStatus.DONE,
-            dueDate
-        )
-    }
-
     companion object {
 
         /**
