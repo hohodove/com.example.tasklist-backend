@@ -56,7 +56,7 @@ class Task private constructor(
          *
          * @return 再構成されたタスク
          */
-        fun reconstract(
+        fun reconstruct(
             taskId: TaskId,
             taskName: TaskName,
             taskStatus: TaskStatus,

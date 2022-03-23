@@ -24,7 +24,7 @@ data class TaskRepositoryDto(
      * @return 生成されたタスク。
      */
     fun recordToDomain(): Task =
-        Task.reconstract(
+        Task.reconstruct(
             TaskId.valueOf(taskId),
             TaskName.valueOf(taskName),
             TaskStatus.valueOf(taskStatus),

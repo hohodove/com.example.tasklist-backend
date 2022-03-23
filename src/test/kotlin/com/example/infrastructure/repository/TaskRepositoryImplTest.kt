@@ -15,14 +15,14 @@ internal class TaskRepositoryImplTest {
 
     @Test
     fun `タスクの保存、取得、削除ができる`() {
-        val task1 = Task.reconstract(
+        val task1 = Task.reconstruct(
             TaskId.valueOf("1234abcd-56ef-78ab-90cd-123456efabcd"),
             TaskName.valueOf("タスク１"),
             TaskStatus.NOT_COMPLETED,
             DueDate.reconstruct(LocalDate.of(2001, 1, 1))
         )
 
-        val task2 = Task.reconstract(
+        val task2 = Task.reconstruct(
             TaskId.valueOf("2345bcde-67fa-89bc-01de-234567fabcde"),
             TaskName.valueOf("タスク２"),
             TaskStatus.NOT_COMPLETED,
