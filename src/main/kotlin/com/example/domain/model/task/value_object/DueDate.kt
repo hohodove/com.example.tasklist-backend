@@ -24,13 +24,13 @@ class DueDate private constructor(val value: LocalDate) : ValueObject<LocalDate>
          * @return 指定された値を持つタスク期限日
          */
         fun valueOf(value: LocalDate?): DueDate {
-            if (value == null) {
-                return DueDate(LocalDate.now())
-            } else {
-                return value
+            return if (value != null) {
+                value
                     .takeIf { it.isAfter(LocalDate.now().minusDays(1)) }
                     ?.let { DueDate(it) }
                     ?: throw TaskInvalidRequestException("DueDate($value) must be after today.")
+            } else {
+                DueDate(LocalDate.now())
             }
         }
 
