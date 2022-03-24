@@ -54,4 +54,53 @@ class Task private constructor(
             )
 
     }
+
+    /**
+     * タスク名を変更する。
+     *
+     * @return タスク名が変更されたタスク
+     */
+    fun changeName(changedName: TaskName): Task = Task(
+        taskId,
+        changedName,
+        taskStatus,
+        dueDate
+    )
+
+    /**
+     * タスク状態を完了にする。
+     *
+     * @return タスク状態が完了となったタスク
+     */
+    fun done(): Task = Task(
+            taskId,
+            taskName,
+            TaskStatus.DONE,
+            dueDate
+        )
+
+    /**
+     * タスクを未完了状態にする。
+     *
+     * @return タスク状態が未完了となったタスク
+     */
+    fun undone(): Task = Task(
+            taskId,
+            taskName,
+            TaskStatus.NOT_COMPLETED,
+            dueDate
+        )
+
+    /**
+     * タスク期限を変更する。
+     *
+     * @return タスク期限が変更されたタスク
+     */
+    fun changeDueDate(changedDueDate: DueDate): Task = Task(
+        taskId,
+        taskName,
+        taskStatus,
+        changedDueDate
+    )
+
 }
