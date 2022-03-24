@@ -30,9 +30,16 @@ class DueDate private constructor(val value: LocalDate) : ValueObject<LocalDate>
                     ?.let { DueDate(it) }
                     ?: throw TaskInvalidRequestException("DueDate($value) must be after today.")
             } else {
-                DueDate(LocalDate.now())
+                this.createDefault()
             }
         }
+
+        /**
+         * タスク期限日が当日のタスク期限を作成する。
+         *
+         * @return 当日の値を持つタスク期限日
+         */
+        fun createDefault(): DueDate = DueDate(LocalDate.now())
 
         fun reconstruct(value: LocalDate): DueDate = DueDate(value)
     }
