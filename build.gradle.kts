@@ -5,6 +5,7 @@ val logback_version: String by project
 plugins {
     application
     kotlin("jvm") version "1.6.10"
+    jacoco
 }
 
 group = "com.example"
@@ -32,7 +33,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
 
-tasks{
+tasks {
     test {
         // JUnit5を使うための設定
         useJUnitPlatform()
@@ -48,4 +49,12 @@ tasks{
             setExceptionFormat("full")
         }
     }
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
 }
