@@ -4,7 +4,6 @@ import com.example.domain.model.task.value_object.DueDate
 import com.example.domain.model.task.value_object.TaskId
 import com.example.domain.model.task.value_object.TaskName
 import com.example.domain.model.task.value_object.TaskStatus
-import java.time.LocalDate
 
 class Task private constructor(
     val taskId: TaskId,
@@ -26,7 +25,7 @@ class Task private constructor(
          */
         fun create(
             taskName: TaskName,
-            dueDate: DueDate = DueDate.valueOf(LocalDate.now())
+            dueDate: DueDate = DueDate.createDefault()
         ): Task =
             Task(
                 TaskId.generate(),
