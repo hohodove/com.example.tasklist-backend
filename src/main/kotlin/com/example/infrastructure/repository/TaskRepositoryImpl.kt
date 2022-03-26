@@ -31,4 +31,9 @@ class TaskRepositoryImpl : TaskRepository {
     override fun remove(taskId: TaskId) {
         return dao.delete(taskId.value())
     }
+
+    override fun update(task: Task) {
+        val taskRepositoryDto = TaskRepositoryDto.domainToRecord(task)
+        return dao.update(taskRepositoryDto)
+    }
 }
