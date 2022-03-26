@@ -28,7 +28,7 @@ internal class TaskControllerKtTest {
                 addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
 
                 val createTaskRequest = CreateTaskRequest(
-                    name = "タスク１"
+                    "タスク１"
                 )
 
                 val createTaskJsonBody = mapper.writeValueAsString(createTaskRequest)
