@@ -1,6 +1,9 @@
 package com.example.usecase
 
+import com.example.domain.model.task.value_object.DueDate
 import com.example.domain.model.task.value_object.TaskId
+import com.example.domain.model.task.value_object.TaskName
+import com.example.domain.model.task.value_object.TaskStatus
 import com.example.infrastructure.repository.TaskRepositoryImpl
 import com.example.usecase.dto.TaskUseCaseDto
 
@@ -25,5 +28,32 @@ class TaskUseCase {
 
     fun remove(taskId: String) {
         taskRepository.remove(TaskId.valueOf(taskId))
+    }
+
+    fun update(taskUseCaseDto: TaskUseCaseDto) {
+        val taskId = taskUseCaseDto.id?.let { TaskId.valueOf(it) }
+
+        val currentTask = taskId
+            ?.let { taskRepository.findById(it) }
+            ?: throw java.lang.IllegalArgumentException("タスクIDが不正です。")
+
+        val changedTaskName = taskUseCaseDto.name
+            ?.let { TaskName.valueOf(it) }
+            ?: currentTask.taskName
+
+        val changedTaskStatus = taskUseCaseDto.status
+            ?.let { TaskStatus.valueOf(it) }
+            ?: currentTask.taskStatus
+
+        val changedDueDate = taskUseCaseDto.dueDate
+            ?.let { DueDate.valueOf(it) }
+            ?: currentTask.dueDate
+
+        val changedTask = currentTask
+            .changeName(changedTaskName)
+            .changeStatus(changedTaskStatus)
+            .changeDueDate(changedDueDate)
+
+        taskRepository.update(changedTask)
     }
 }

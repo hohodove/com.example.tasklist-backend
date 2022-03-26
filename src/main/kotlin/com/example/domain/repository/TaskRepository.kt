@@ -15,4 +15,6 @@ interface TaskRepository {
     fun save(task: Task)
 
     fun remove(taskId: TaskId)
+    
+    fun update(task: Task)
 }

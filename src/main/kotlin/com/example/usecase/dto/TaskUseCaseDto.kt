@@ -7,15 +7,19 @@ import java.time.LocalDate
 
 data class TaskUseCaseDto(
     val id: String? = null,
-    val name: String,
+    val name: String? = null,
     val status: String? = null,
     val dueDate: LocalDate? = null
 ) {
 
-    fun createDomain(): Task = Task.create(
-        TaskName.valueOf(name),
-        DueDate.valueOf(dueDate)
-    )
+    fun createDomain(): Task {
+        requireNotNull(name) {"タスク名は必須項目です。"}
+
+        return Task.create(
+            TaskName.valueOf(name),
+            DueDate.valueOf(dueDate)
+        )
+    }
 
     companion object {
         fun domainToDto(task: Task): TaskUseCaseDto = TaskUseCaseDto(

@@ -36,4 +36,16 @@ interface TaskJdbiRepository : SqlObject {
         where id = :taskId
     """)
     fun delete(taskId: String)
+
+    @SqlUpdate("""
+        update
+        tasks
+        set 
+            name = :taskRepositoryDto.taskName,
+            status = :taskRepositoryDto.taskStatus,
+            duedate = :taskRepositoryDto.dueDate
+        where
+        Id = :taskRepositoryDto.taskId
+    """)
+    fun update(taskRepositoryDto: TaskRepositoryDto)
 }
