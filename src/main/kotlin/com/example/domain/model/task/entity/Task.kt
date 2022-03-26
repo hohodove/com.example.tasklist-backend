@@ -91,6 +91,13 @@ class Task private constructor(
             dueDate
         )
 
+    fun changeStatus(changedStatus: TaskStatus): Task = Task(
+        taskId,
+        taskName,
+        changedStatus,
+        dueDate
+    )
+
     /**
      * タスク期限を変更する。
      *

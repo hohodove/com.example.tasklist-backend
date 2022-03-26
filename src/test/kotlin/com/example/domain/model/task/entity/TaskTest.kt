@@ -90,6 +90,14 @@ internal class TaskTest {
     }
 
     @Test
+    fun `生成したタスクの状態を変更できること`() {
+        val task = TaskTestFactory.create()
+        val changedTask = task.changeStatus(TaskStatus.DONE)
+
+        assertEquals(TaskStatus.DONE, changedTask.taskStatus)
+    }
+
+    @Test
     fun `生成したタスクの期限を変更できること`() {
         val task = TaskTestFactory.create()
 
