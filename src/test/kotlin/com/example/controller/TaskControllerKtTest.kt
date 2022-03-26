@@ -18,6 +18,7 @@ internal class TaskControllerKtTest {
     fun `タスクの作成、取得、削除ができること`() {
 
         val mapper = jacksonObjectMapper()
+        mapper.findAndRegisterModules()
 
         withTestApplication({
             configureRouting()
