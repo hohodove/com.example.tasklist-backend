@@ -174,7 +174,7 @@ internal class TaskControllerKtTest {
                 val findTaskByIdResponse = mapper.readValue<FindTaskByIdResponse>(response.content!!)
                 assertEquals(updatedTaskName.value(), findTaskByIdResponse.name)
                 assertEquals(updatedTaskStatus.toString(), findTaskByIdResponse.status)
-                assertEquals(updatedDueDate.value().toString(), findTaskByIdResponse.dueDate.toString())
+                assertEquals(updatedDueDate.value().toString(), findTaskByIdResponse.dueDate)
             }
 
                 handleRequest(HttpMethod.Delete, "/task/${taskIds[0]}")
