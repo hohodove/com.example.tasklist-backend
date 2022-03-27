@@ -23,8 +23,8 @@ fun Route.taskController() {
         val pathParameter = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
 
         taskUseCase.findById(pathParameter)
-            ?.let { call.respond(it)}
-            ?: call.respond("Not Found")
+            ?.let { call.respond(it) }
+            ?: call.respond(mapOf("message" to "Not Found."))
     }
 
     post("/task") {
