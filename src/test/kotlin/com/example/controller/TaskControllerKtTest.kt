@@ -2,9 +2,11 @@ package com.example.controller
 
 import com.example.controller.request.CreateTaskRequest
 import com.example.controller.request.UpdateTaskRequest
+import com.example.controller.response.ErrorMessageResponse
 import com.example.controller.response.FindAllTasksResponse
 import com.example.controller.response.FindTaskByIdResponse
 import com.example.domain.model.task.value_object.DueDate
+import com.example.domain.model.task.value_object.TaskId
 import com.example.domain.model.task.value_object.TaskName
 import com.example.domain.model.task.value_object.TaskStatus
 import com.example.infrastructure.framework.configureRouting
@@ -97,6 +99,28 @@ internal class TaskControllerKtTest {
     }
 
     @Test
+    fun `タスク取得時、該当タスクが存在しない場合、存在しない旨のメッセージを返却する`() {
+        val mapper = jacksonObjectMapper()
+        mapper.findAndRegisterModules()
+
+        // 何でも良いのでタスクIDを生成。
+        val taskId = TaskId.generate()
+
+        withTestApplication({
+            configureRouting()
+            configureSerialization()
+        }) {
+
+            handleRequest(HttpMethod.Get, "/task/${taskId.value()}").apply {
+                assertEquals(HttpStatusCode.OK, response.status())
+
+                val findTaskByIdResponse = mapper.readValue<ErrorMessageResponse>(response.content!!)
+                assertEquals("Not Found.", findTaskByIdResponse.message)
+            }
+        }
+    }
+
+    @Test
     fun `タスクの更新ができること`() {
         val mapper = jacksonObjectMapper()
         mapper.findAndRegisterModules()
@@ -150,7 +174,7 @@ internal class TaskControllerKtTest {
                 val findTaskByIdResponse = mapper.readValue<FindTaskByIdResponse>(response.content!!)
                 assertEquals(updatedTaskName.value(), findTaskByIdResponse.name)
                 assertEquals(updatedTaskStatus.toString(), findTaskByIdResponse.status)
-                assertEquals(updatedDueDate.value().toString(), findTaskByIdResponse.dueDate.toString())
+                assertEquals(updatedDueDate.value().toString(), findTaskByIdResponse.dueDate)
             }
 
                 handleRequest(HttpMethod.Delete, "/task/${taskIds[0]}")

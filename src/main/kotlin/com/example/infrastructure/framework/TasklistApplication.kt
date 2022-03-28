@@ -8,4 +8,5 @@ fun Application.module() {
     configureRouting()
     configureLogging()
     configureSerialization()
+    configureStatusPages()
 }

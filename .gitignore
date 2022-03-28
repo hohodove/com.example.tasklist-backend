@@ -37,3 +37,4 @@ test-splits/
 /gradle.iws
 
 /docker/postgresql/data/
+/.idea/inspectionProfiles/Project_Default.xml
