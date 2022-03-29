@@ -4,12 +4,14 @@ import com.example.domain.model.task.value_object.DueDate
 import com.example.domain.model.task.value_object.TaskId
 import com.example.domain.model.task.value_object.TaskName
 import com.example.domain.model.task.value_object.TaskStatus
-import com.example.infrastructure.repository.TaskRepositoryImpl
+import com.example.domain.repository.TaskRepository
 import com.example.usecase.dto.TaskUseCaseDto
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class TaskUseCase {
+class TaskUseCase : KoinComponent {
 
-    private val taskRepository = TaskRepositoryImpl()
+    val taskRepository: TaskRepository by inject()
 
     fun findAll(): List<TaskUseCaseDto> {
         return taskRepository.findAll()

@@ -9,4 +9,5 @@ fun Application.module() {
     configureLogging()
     configureSerialization()
     configureStatusPages()
+    configureKoin()
 }
