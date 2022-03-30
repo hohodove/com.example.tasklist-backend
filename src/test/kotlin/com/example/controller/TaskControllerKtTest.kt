@@ -11,15 +11,30 @@ import com.example.domain.model.task.value_object.TaskName
 import com.example.domain.model.task.value_object.TaskStatus
 import com.example.infrastructure.framework.configureRouting
 import com.example.infrastructure.framework.configureSerialization
+import com.example.infrastructure.framework.koin_modules.taskRepositoryModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.core.logger.Level
+import org.koin.test.junit5.KoinTestExtension
 import java.time.LocalDate
 
 internal class TaskControllerKtTest {
+
+    @JvmField
+    @RegisterExtension
+    val koinTestExtension = KoinTestExtension.create {
+
+        //KoinのIssue #1188の通り、Ktor 1.6.0以降でKoinにてNoSuchMethodError例外が発生するため、
+        // workaroundとして、ロガーのログレベルをERRORで設定している。
+        printLogger(level = Level.ERROR)
+
+        modules(taskRepositoryModule)
+    }
 
     @Test
     fun `タスクの作成、取得、削除ができること`() {

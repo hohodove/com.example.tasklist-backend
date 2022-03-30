@@ -1,12 +1,25 @@
 package com.example.usecase
 
-import com.example.domain.model.task.*
+import com.example.infrastructure.framework.koin_modules.taskRepositoryModule
 import com.example.usecase.dto.TaskUseCaseDto
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
+import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.core.logger.Level
+import org.koin.test.junit5.KoinTestExtension
 
 internal class TaskUseCaseTest {
+
+    @JvmField
+    @RegisterExtension
+    val koinTestExtension = KoinTestExtension.create {
+
+        //KoinのIssue #1188の通り、Ktor 1.6.0以降でKoinにてNoSuchMethodError例外が発生するため、
+        // workaroundとして、ロガーのログレベルをERRORで設定している。
+        printLogger(level = Level.ERROR)
+
+        modules(taskRepositoryModule)
+    }
 
     val taskUseCase = TaskUseCase()
 
