@@ -11,7 +11,7 @@ import org.koin.core.component.inject
 
 class TaskUseCase : KoinComponent {
 
-    val taskRepository: TaskRepository by inject()
+    val taskRepository by inject<TaskRepository>()
 
     fun findAll(): List<TaskUseCaseDto> {
         return taskRepository.findAll()

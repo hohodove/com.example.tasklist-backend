@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.core.component.inject
 import org.koin.core.logger.Level
 import org.koin.test.KoinTest
 import org.koin.test.inject
@@ -24,13 +25,13 @@ internal class TaskRepositoryImplTest : KoinTest {
     val koinTestExtension = KoinTestExtension.create {
 
         //KoinのIssue #1188の通り、Ktor 1.6.0以降でKoinにてNoSuchMethodError例外が発生するため、
-        // workaroundとして、ロガーのログレベルをERRORで設定している。
+        //workaroundとして、ロガーのログレベルにERRORを設定。
         printLogger(level = Level.ERROR)
 
         modules(taskRepositoryModule)
     }
 
-    val taskRepository: TaskRepository by inject()
+    val taskRepository by inject<TaskRepository>()
 
     @Test
     fun `タスクの保存、取得、削除ができる`() {
