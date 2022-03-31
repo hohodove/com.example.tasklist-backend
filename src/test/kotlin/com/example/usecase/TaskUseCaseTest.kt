@@ -15,7 +15,7 @@ internal class TaskUseCaseTest {
     val koinTestExtension = KoinTestExtension.create {
 
         //KoinのIssue #1188の通り、Ktor 1.6.0以降でKoinにてNoSuchMethodError例外が発生するため、
-        // workaroundとして、ロガーのログレベルをERRORで設定している。
+        //workaroundとして、ロガーのログレベルにERRORを設定。
         printLogger(level = Level.ERROR)
 
         modules(taskRepositoryModule)
