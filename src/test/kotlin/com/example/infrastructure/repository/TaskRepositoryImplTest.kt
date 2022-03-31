@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.core.component.inject
 import org.koin.core.logger.Level
 import org.koin.test.KoinTest
 import org.koin.test.inject
@@ -30,7 +31,7 @@ internal class TaskRepositoryImplTest : KoinTest {
         modules(taskRepositoryModule)
     }
 
-    val taskRepository: TaskRepository by inject()
+    val taskRepository by inject<TaskRepository>()
 
     @Test
     fun `タスクの保存、取得、削除ができる`() {
