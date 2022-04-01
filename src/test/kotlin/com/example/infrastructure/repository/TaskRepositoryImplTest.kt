@@ -6,30 +6,20 @@ import com.example.domain.model.task.value_object.TaskId
 import com.example.domain.model.task.value_object.TaskName
 import com.example.domain.model.task.value_object.TaskStatus
 import com.example.domain.repository.TaskRepository
-import com.example.infrastructure.framework.koin_modules.taskRepositoryModule
+import com.example.test_util.KoinTestConfig
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
-import org.koin.core.component.inject
-import org.koin.core.logger.Level
 import org.koin.test.KoinTest
 import org.koin.test.inject
-import org.koin.test.junit5.KoinTestExtension
 import java.time.LocalDate
 
 internal class TaskRepositoryImplTest : KoinTest {
 
     @JvmField
     @RegisterExtension
-    val koinTestExtension = KoinTestExtension.create {
-
-        //KoinのIssue #1188の通り、Ktor 1.6.0以降でKoinにてNoSuchMethodError例外が発生するため、
-        //workaroundとして、ロガーのログレベルにERRORを設定。
-        printLogger(level = Level.ERROR)
-
-        modules(taskRepositoryModule)
-    }
+    val koinTestConfig = KoinTestConfig.set()
 
     val taskRepository by inject<TaskRepository>()
 
