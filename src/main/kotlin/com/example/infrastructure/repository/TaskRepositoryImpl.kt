@@ -9,7 +9,10 @@ import org.jdbi.v3.sqlobject.kotlin.onDemand
 
 class TaskRepositoryImpl : TaskRepository {
 
-    val jdbi: Jdbi = Jdbi.create("jdbc:postgresql://localhost:5432/test", "admin", "password")
+    val dataSourceFactory = PostgreDataSourceFactory()
+    val dataSource = dataSourceFactory.create()
+
+    val jdbi: Jdbi = Jdbi.create(dataSource.url, dataSource.username, dataSource.password)
         .installPlugins()
     val dao = jdbi.onDemand<TaskJdbiRepository>()
 
