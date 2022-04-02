@@ -11,9 +11,11 @@ import com.example.domain.model.task.value_object.TaskName
 import com.example.domain.model.task.value_object.TaskStatus
 import com.example.infrastructure.framework.configureRouting
 import com.example.infrastructure.framework.configureSerialization
+import com.example.infrastructure.framework.setupConfig
 import com.example.test_util.KoinTestConfig
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import io.ktor.config.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -35,8 +37,14 @@ internal class TaskControllerKtTest {
         mapper.findAndRegisterModules()
 
         withTestApplication({
+            (environment.config as MapApplicationConfig).apply {
+                put("ktor.dataSource.url", "jdbc:postgresql://localhost:5432/test")
+                put("ktor.dataSource.username", "admin")
+                put("ktor.dataSource.password", "password")
+            }
             configureRouting()
             configureSerialization()
+            setupConfig()
         }) {
 
             handleRequest(HttpMethod.Post, "/task") {
@@ -114,8 +122,14 @@ internal class TaskControllerKtTest {
         val taskId = TaskId.generate()
 
         withTestApplication({
+            (environment.config as MapApplicationConfig).apply {
+                put("ktor.dataSource.url", "jdbc:postgresql://localhost:5432/test")
+                put("ktor.dataSource.username", "admin")
+                put("ktor.dataSource.password", "password")
+            }
             configureRouting()
             configureSerialization()
+            setupConfig()
         }) {
 
             handleRequest(HttpMethod.Get, "/task/${taskId.value()}").apply {
@@ -133,8 +147,14 @@ internal class TaskControllerKtTest {
         mapper.findAndRegisterModules()
 
         withTestApplication({
+            (environment.config as MapApplicationConfig).apply {
+                put("ktor.dataSource.url", "jdbc:postgresql://localhost:5432/test")
+                put("ktor.dataSource.username", "admin")
+                put("ktor.dataSource.password", "password")
+            }
             configureRouting()
             configureSerialization()
+            setupConfig()
         }) {
 
             handleRequest(HttpMethod.Post, "/task") {
