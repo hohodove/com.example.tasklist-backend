@@ -1,7 +1,7 @@
 package com.example.infrastructure.repository
 
-data class DataSource(
-    val url: String,
-    val username: String,
-    val password: String
-)
+class DataSource {
+    lateinit var url: String
+    lateinit var username: String
+    lateinit var password: String
+}

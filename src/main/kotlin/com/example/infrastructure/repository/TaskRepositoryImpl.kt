@@ -6,11 +6,12 @@ import com.example.domain.repository.TaskRepository
 import com.example.infrastructure.repository.dto.TaskRepositoryDto
 import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.sqlobject.kotlin.onDemand
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class TaskRepositoryImpl : TaskRepository {
+class TaskRepositoryImpl() : TaskRepository, KoinComponent {
 
-    val dataSourceFactory = PostgreDataSourceFactory()
-    val dataSource = dataSourceFactory.create()
+    val dataSource by inject<DataSource>()
 
     val jdbi: Jdbi = Jdbi.create(dataSource.url, dataSource.username, dataSource.password)
         .installPlugins()
