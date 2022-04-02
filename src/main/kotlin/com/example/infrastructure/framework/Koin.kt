@@ -1,5 +1,6 @@
 package com.example.infrastructure.framework
 
+import com.example.infrastructure.framework.koin_modules.dataSourceModule
 import com.example.infrastructure.framework.koin_modules.taskRepositoryModule
 import io.ktor.application.*
 import org.koin.core.logger.Level
@@ -12,6 +13,6 @@ fun Application.configureKoin() {
         //workaroundとして、ロガーのログレベルにERRORを設定。
         slf4jLogger(level = Level.ERROR)
 
-        modules(taskRepositoryModule)
+        modules(taskRepositoryModule, dataSourceModule)
     }
 }
