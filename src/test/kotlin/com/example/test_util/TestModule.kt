@@ -16,7 +16,5 @@ fun withTestModule(block: TestApplicationEngine.() -> Unit) {
             createTestConfig()
         }
         module()
-    }) {
-        block
-    }
+    }, block)
 }
