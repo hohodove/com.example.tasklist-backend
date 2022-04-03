@@ -1,32 +1,18 @@
 package com.example.usecase
 
-import com.example.infrastructure.framework.setupConfig
-import com.example.test_util.KoinTestConfig
+import com.example.test_util.withTestModule
 import com.example.usecase.dto.TaskUseCaseDto
-import io.ktor.config.*
-import io.ktor.server.testing.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.RegisterExtension
 
 internal class TaskUseCaseTest {
-
-    @JvmField
-    @RegisterExtension
-    val koinTestConfig = KoinTestConfig.set()
 
     val taskUseCase = TaskUseCase()
 
     @Test
     fun `タスクの保存、取得、削除ができる`() {
-        withTestApplication({
-            (environment.config as MapApplicationConfig).apply {
-                put("ktor.dataSource.url", "jdbc:postgresql://localhost:5432/test")
-                put("ktor.dataSource.username", "admin")
-                put("ktor.dataSource.password", "password")
-            }
-            setupConfig()
-        }) {
+        withTestModule {
+
             val taskUseCaseDto1 = TaskUseCaseDto(
                 name = "タスク１"
             )

@@ -9,26 +9,17 @@ import com.example.domain.model.task.value_object.DueDate
 import com.example.domain.model.task.value_object.TaskId
 import com.example.domain.model.task.value_object.TaskName
 import com.example.domain.model.task.value_object.TaskStatus
-import com.example.infrastructure.framework.configureRouting
-import com.example.infrastructure.framework.configureSerialization
-import com.example.infrastructure.framework.setupConfig
-import com.example.test_util.KoinTestConfig
+import com.example.test_util.withTestModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import io.ktor.config.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.RegisterExtension
 import java.time.LocalDate
 
 internal class TaskControllerKtTest {
-
-    @JvmField
-    @RegisterExtension
-    val koinTestConfig = KoinTestConfig.set()
 
     @Test
     fun `タスクの作成、取得、削除ができること`() {
@@ -36,16 +27,7 @@ internal class TaskControllerKtTest {
         val mapper = jacksonObjectMapper()
         mapper.findAndRegisterModules()
 
-        withTestApplication({
-            (environment.config as MapApplicationConfig).apply {
-                put("ktor.dataSource.url", "jdbc:postgresql://localhost:5432/test")
-                put("ktor.dataSource.username", "admin")
-                put("ktor.dataSource.password", "password")
-            }
-            configureRouting()
-            configureSerialization()
-            setupConfig()
-        }) {
+        withTestModule {
 
             handleRequest(HttpMethod.Post, "/task") {
                 addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
@@ -121,16 +103,7 @@ internal class TaskControllerKtTest {
         // 何でも良いのでタスクIDを生成。
         val taskId = TaskId.generate()
 
-        withTestApplication({
-            (environment.config as MapApplicationConfig).apply {
-                put("ktor.dataSource.url", "jdbc:postgresql://localhost:5432/test")
-                put("ktor.dataSource.username", "admin")
-                put("ktor.dataSource.password", "password")
-            }
-            configureRouting()
-            configureSerialization()
-            setupConfig()
-        }) {
+        withTestModule {
 
             handleRequest(HttpMethod.Get, "/task/${taskId.value()}").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
@@ -146,16 +119,7 @@ internal class TaskControllerKtTest {
         val mapper = jacksonObjectMapper()
         mapper.findAndRegisterModules()
 
-        withTestApplication({
-            (environment.config as MapApplicationConfig).apply {
-                put("ktor.dataSource.url", "jdbc:postgresql://localhost:5432/test")
-                put("ktor.dataSource.username", "admin")
-                put("ktor.dataSource.password", "password")
-            }
-            configureRouting()
-            configureSerialization()
-            setupConfig()
-        }) {
+        withTestModule {
 
             handleRequest(HttpMethod.Post, "/task") {
                 addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
