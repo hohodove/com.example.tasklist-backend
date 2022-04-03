@@ -5,5 +5,5 @@ import com.example.infrastructure.repository.TaskRepositoryImpl
 import org.koin.dsl.module
 
 val taskRepositoryModule = module {
-    factory<TaskRepository> { TaskRepositoryImpl() }
+    single<TaskRepository> { TaskRepositoryImpl() }
 }
