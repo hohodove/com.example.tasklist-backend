@@ -4,17 +4,16 @@ import com.example.domain.model.task.entity.Task
 import com.example.domain.model.task.value_object.TaskId
 import com.example.domain.repository.TaskRepository
 import com.example.infrastructure.repository.dto.TaskRepositoryDto
-import org.jdbi.v3.core.Jdbi
 import org.jdbi.v3.sqlobject.kotlin.onDemand
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class TaskRepositoryImpl() : TaskRepository, KoinComponent {
 
-    val dataSource by inject<DataSource>()
+    val databaseFactory by inject<DatabaseFactory>()
 
-    val jdbi: Jdbi = Jdbi.create(dataSource.url, dataSource.username, dataSource.password)
-        .installPlugins()
+    val jdbi = databaseFactory.connect()
+
     val dao = jdbi.onDemand<TaskJdbiRepository>()
 
     override fun findById(taskId: TaskId): Task? {
