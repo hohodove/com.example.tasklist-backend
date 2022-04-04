@@ -4,7 +4,7 @@ import com.example.infrastructure.repository.DataSource
 import io.ktor.application.*
 import org.koin.ktor.ext.inject
 
-fun Application.setupConfig() {
+fun Application.configureDataSource() {
 
     val dataSource by inject<DataSource>()
 
