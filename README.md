@@ -34,21 +34,14 @@ http://localhost:8081/
 ./gradlew test
 ```
 
-
-### Dockerイメージのビルド(初期構築時のみ)
-```
-cd ~/develop/tasklist-backend
-docker-compose build
-docker images
-```
-
-### コンテナ起動、確認
+### Dockerコンテナ起動（image pull含む）、確認
 ```
 docker-compose up -d
+docker images
 docker ps
 ```
 
-### コンテナ停止
+### Dockerコンテナ停止
 ```
 docker-compose stop
 ```
