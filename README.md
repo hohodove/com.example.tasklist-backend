@@ -57,3 +57,11 @@ psql -U admin -d test
 \dt
 select * from tasks;
 ```
+
+### Flyway
+```
+./gradlew flywayInfo
+./gradlew flywayClean
+./gradlew flywayMigrate -i
+./gradlew flywayInfo
+```

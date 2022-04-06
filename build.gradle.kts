@@ -7,6 +7,7 @@ plugins {
     application
     kotlin("jvm") version "1.6.10"
     jacoco
+    id("org.flywaydb.flyway") version "8.5.5"
 }
 
 group = "com.example"
@@ -63,4 +64,10 @@ tasks.test {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+}
+
+flyway {
+    url = "jdbc:postgresql://localhost:5432/test"
+    user = "admin"
+    password = "password"
 }
