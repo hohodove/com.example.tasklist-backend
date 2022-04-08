@@ -1,17 +1,21 @@
 # tasklist-backend
 
 ## environment
-- M1 MacBook Air
-- IntelliJ IDEA 2021.3.2 (Community Edition)
++ M1 MacBook Air
++ IntelliJ IDEA 2021.3.2 (Community Edition)
 
 ## Requirement
-- Kotlin 1.6.10
-- Ktor 1.6.7
-- JDBI 3.27.1
-- JUnit 5
++ Kotlin 1.6.10
++ Ktor 1.6.7
++ JDBI 3.27.1
++ Koin 3.1.5
++ JUnit 5
++ docker
++ PostgreSQL
++ H2
 
 ## note
-- プロジェクトはKtor Project Generator(start.ktor.io)にて作成。(IntelliJ Community版ではKtorプラグインが利用不可のため)
++ プロジェクトはKtor Project Generator(start.ktor.io)にて作成。(IntelliJ Community版ではKtorプラグインが利用不可のため)
 
 ## URL
 ```
@@ -30,21 +34,14 @@ http://localhost:8081/
 ./gradlew test
 ```
 
-
-### Dockerイメージのビルド(初期構築時のみ)
-```
-cd ~/develop/tasklist-backend
-docker-compose build
-docker images
-```
-
-### コンテナ起動、確認
+### Dockerコンテナ起動（image pull含む）、確認
 ```
 docker-compose up -d
+docker images
 docker ps
 ```
 
-### コンテナ停止
+### Dockerコンテナ停止
 ```
 docker-compose stop
 ```
@@ -56,4 +53,12 @@ psql -U admin -d test
 --TABLE一覧
 \dt
 select * from tasks;
+```
+
+### Flyway
+```
+./gradlew flywayInfo
+./gradlew flywayClean
+./gradlew flywayMigrate -i
+./gradlew flywayInfo
 ```

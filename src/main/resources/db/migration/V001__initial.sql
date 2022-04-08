@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS tasks;
+
 CREATE TABLE tasks (
     id VARCHAR(36) PRIMARY KEY,
     name VARCHAR(100),
