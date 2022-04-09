@@ -2,6 +2,10 @@ val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val koin_version: String by project
+val jdbi_version: String by project
+val postgresql_version: String by project
+val junit_version: String by project
+val h2_version: String by project
 
 plugins {
     application
@@ -26,18 +30,18 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-jackson:$ktor_version")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$ktor_version")
-    implementation("org.jdbi:jdbi3-kotlin:3.27.1")
-    implementation("org.jdbi:jdbi3-kotlin-sqlobject:3.27.1")
-    implementation("org.jdbi:jdbi3-postgres:3.27.2")
-    implementation("org.postgresql:postgresql:42.3.3")
+    implementation("org.jdbi:jdbi3-kotlin:$jdbi_version")
+    implementation("org.jdbi:jdbi3-kotlin-sqlobject:$jdbi_version")
+    implementation("org.jdbi:jdbi3-postgres:$jdbi_version")
+    implementation("org.postgresql:postgresql:$postgresql_version")
     implementation("io.insert-koin:koin-ktor:$koin_version")
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junit_version")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     testImplementation("io.insert-koin:koin-test:$koin_version")
     testImplementation("io.insert-koin:koin-test-junit5:$koin_version")
-    testImplementation("com.h2database:h2:2.1.210")
+    testImplementation("com.h2database:h2:$h2_version")
 }
 
 tasks {
