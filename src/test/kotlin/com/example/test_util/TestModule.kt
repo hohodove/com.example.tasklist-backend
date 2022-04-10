@@ -8,7 +8,7 @@ import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
 fun MapApplicationConfig.createTestConfig() {
-    put("ktor.dataSource.url", "jdbc:h2:mem:test")
+    put("ktor.dataSource.url", "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1")
     // username, passwordはH2の接続には不要だが、DataSourceクラスのusername, passwordはnullを非許容のため、ダミーで設定している。
     put("ktor.dataSource.username", "")
     put("ktor.dataSource.password", "")
