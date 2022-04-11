@@ -8,7 +8,6 @@ fun Application.configureDataSource() {
 
     val dataSource by inject<DataSource>()
 
-    // DataSource
     val dataSourceObject = environment.config.config("ktor.dataSource")
     dataSource.url =  dataSourceObject.property("url").getString()
     dataSource.username = dataSourceObject.property("username").getString()

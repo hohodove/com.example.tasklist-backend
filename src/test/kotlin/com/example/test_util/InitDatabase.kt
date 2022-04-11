@@ -4,6 +4,7 @@ import org.jdbi.v3.sqlobject.SqlObject
 import org.jdbi.v3.sqlobject.statement.SqlUpdate
 
 interface InitDatabase : SqlObject {
+
     @SqlUpdate("""
         CREATE TABLE IF NOT EXISTS 
         tasks
@@ -15,4 +16,5 @@ interface InitDatabase : SqlObject {
         )
     """)
     fun createTasksTable()
+
 }
