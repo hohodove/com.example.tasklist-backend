@@ -16,6 +16,7 @@
 
 ## note
 + プロジェクトはKtor Project Generator(start.ktor.io)にて作成。(IntelliJ Community版ではKtorプラグインが利用不可のため)
++ Databaseは通常動作時はPostgreSQL、Unit test時はH2で稼働。
 
 ## URL
 ```

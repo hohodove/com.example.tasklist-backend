@@ -7,9 +7,8 @@ import org.jdbi.v3.core.h2.H2DatabasePlugin
 import org.jdbi.v3.core.kotlin.KotlinPlugin
 import org.jdbi.v3.sqlobject.kotlin.KotlinSqlObjectPlugin
 import org.jdbi.v3.sqlobject.kotlin.onDemand
-import org.koin.core.component.KoinComponent
 
-class TestDatabaseFactory(val dataSource: DataSource) : DatabaseFactory, KoinComponent {
+class TestDatabaseFactory(val dataSource: DataSource) : DatabaseFactory {
     override fun connect(): Jdbi {
 
         val jdbi = Jdbi.create(dataSource.url)
@@ -21,7 +20,6 @@ class TestDatabaseFactory(val dataSource: DataSource) : DatabaseFactory, KoinCom
             .installPlugin(H2DatabasePlugin())
 
         val dao = jdbi.onDemand<InitDatabase>()
-
         dao.createTasksTable()
 
         return jdbi
