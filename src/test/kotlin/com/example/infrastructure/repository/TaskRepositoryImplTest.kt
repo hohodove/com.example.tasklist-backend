@@ -6,6 +6,7 @@ import com.example.domain.model.task.value_object.TaskId
 import com.example.domain.model.task.value_object.TaskName
 import com.example.domain.model.task.value_object.TaskStatus
 import com.example.domain.repository.TaskRepository
+import com.example.test_util.TaskTestFactory
 import com.example.test_util.withTestModule
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -22,12 +23,8 @@ internal class TaskRepositoryImplTest : KoinTest {
     fun `タスクの保存、取得、削除ができる`() {
         withTestModule {
 
-            val task1 = Task.reconstruct(
-                TaskId.valueOf("1234abcd-56ef-78ab-90cd-123456efabcd"),
-                TaskName.valueOf("タスク１"),
-                TaskStatus.NOT_COMPLETED,
-                DueDate.reconstruct(LocalDate.of(2001, 1, 1))
-            )
+            val taskId1 = "1234abcd-56ef-78ab-90cd-123456efabcd"
+            val task1 = TaskTestFactory.create2(taskId1)
 
             val task2 = Task.reconstruct(
                 TaskId.valueOf("2345bcde-67fa-89bc-01de-234567fabcde"),
@@ -41,7 +38,7 @@ internal class TaskRepositoryImplTest : KoinTest {
             assertEquals(2, taskRepository.findAll().size)
 
             val selectedTask = taskRepository.findById(task1.taskId)
-            assertEquals("タスク１", selectedTask?.taskName?.value())
+            assertEquals(taskId1, selectedTask?.taskId?.value())
 
             taskRepository.remove(task1.taskId)
             taskRepository.remove(task2.taskId)
