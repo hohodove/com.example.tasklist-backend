@@ -1,10 +1,6 @@
 package com.example.infrastructure.repository
 
-import com.example.domain.model.task.entity.Task
-import com.example.domain.model.task.value_object.DueDate
 import com.example.domain.model.task.value_object.TaskId
-import com.example.domain.model.task.value_object.TaskName
-import com.example.domain.model.task.value_object.TaskStatus
 import com.example.domain.repository.TaskRepository
 import com.example.test_util.TaskTestFactory
 import com.example.test_util.withTestModule
@@ -13,7 +9,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.koin.test.KoinTest
 import org.koin.test.inject
-import java.time.LocalDate
 
 internal class TaskRepositoryImplTest : KoinTest {
 
@@ -24,14 +19,11 @@ internal class TaskRepositoryImplTest : KoinTest {
         withTestModule {
 
             val taskId1 = "1234abcd-56ef-78ab-90cd-123456efabcd"
-            val task1 = TaskTestFactory.create2(taskId1)
+            val task1 = TaskTestFactory.create(taskId1)
 
-            val task2 = Task.reconstruct(
-                TaskId.valueOf("2345bcde-67fa-89bc-01de-234567fabcde"),
-                TaskName.valueOf("タスク２"),
-                TaskStatus.NOT_COMPLETED,
-                DueDate.reconstruct(LocalDate.of(2002, 2, 2))
-            )
+
+            val taskId2 = "2345bcde-67fa-89bc-01de-234567fabcde"
+            val task2 = TaskTestFactory.create(taskId2)
 
             taskRepository.save(task1)
             taskRepository.save(task2)
