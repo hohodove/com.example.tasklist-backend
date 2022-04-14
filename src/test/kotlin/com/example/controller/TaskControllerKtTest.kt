@@ -21,12 +21,10 @@ import java.time.LocalDate
 
 internal class TaskControllerKtTest {
 
+    val mapper = jacksonObjectMapper().findAndRegisterModules()
+
     @Test
     fun `タスクの作成、取得、削除ができること`() {
-
-        val mapper = jacksonObjectMapper()
-        mapper.findAndRegisterModules()
-
         withTestModule {
 
             handleRequest(HttpMethod.Post, "/task") {
@@ -93,9 +91,6 @@ internal class TaskControllerKtTest {
 
     @Test
     fun `タスク取得時、該当タスクが存在しない場合、存在しない旨のメッセージを返却する`() {
-        val mapper = jacksonObjectMapper()
-        mapper.findAndRegisterModules()
-
         // 何でも良いのでタスクIDを生成。
         val taskId = TaskId.generate()
 
@@ -112,9 +107,6 @@ internal class TaskControllerKtTest {
 
     @Test
     fun `タスクの更新ができること`() {
-        val mapper = jacksonObjectMapper()
-        mapper.findAndRegisterModules()
-
         withTestModule {
 
             handleRequest(HttpMethod.Post, "/task") {
