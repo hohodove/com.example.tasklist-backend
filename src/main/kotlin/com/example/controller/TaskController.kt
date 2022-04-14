@@ -5,6 +5,7 @@ import com.example.controller.request.UpdateTaskRequest
 import com.example.usecase.TaskUseCase
 import com.example.usecase.dto.TaskUseCaseDto
 import io.ktor.application.*
+import io.ktor.http.*
 import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
@@ -38,7 +39,7 @@ fun Route.taskController() {
         )
 
         taskUseCase.create(taskUseCaseDto)
-        call.respond("The task is created.")
+        call.respond(HttpStatusCode.OK)
     }
 
     put("/task/{taskId}") {
@@ -54,7 +55,7 @@ fun Route.taskController() {
         )
 
         taskUseCase.update(taskUseCaseDto)
-        call.respond("The task is updated.")
+        call.respond(HttpStatusCode.OK)
     }
 
     delete("/task/{taskId}") {
@@ -62,6 +63,6 @@ fun Route.taskController() {
         val pathParameter = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
 
         taskUseCase.remove(pathParameter)
-        call.respond("The task is deleted.")
+        call.respond(HttpStatusCode.OK)
     }
 }
