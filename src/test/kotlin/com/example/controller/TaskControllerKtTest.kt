@@ -24,6 +24,18 @@ internal class TaskControllerKtTest {
     val mapper = jacksonObjectMapper().findAndRegisterModules()
 
     @Test
+    fun `全タスク取得エンドポイントについて、全タスク件数が0件の場合、空の配列が返却されること`() {
+        withTestModule {
+            handleRequest(HttpMethod.Get, "/tasks").apply {
+                assertEquals(HttpStatusCode.OK, response.status())
+
+                val findAllTasksResponse = mapper.readValue<List<FindAllTasksResponse>>(response.content!!)
+                assertEquals(0, findAllTasksResponse.size)
+            }
+        }
+    }
+
+    @Test
     fun `タスクの作成、取得、削除ができること`() {
         withTestModule {
 
