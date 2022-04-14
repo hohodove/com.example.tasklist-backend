@@ -40,7 +40,6 @@ internal class TaskControllerKtTest {
                 setBody(createTaskJsonBody)
             }.apply {
                     assertEquals(HttpStatusCode.OK, response.status())
-                    assertEquals("The task is created.", response.content)
                 }
 
             handleRequest(HttpMethod.Post, "/task") {
@@ -54,7 +53,6 @@ internal class TaskControllerKtTest {
                 setBody(createTaskJsonBody)
             }.apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("The task is created.", response.content)
             }
 
             val taskIds: List<String>
@@ -77,12 +75,10 @@ internal class TaskControllerKtTest {
 
             handleRequest(HttpMethod.Delete, "/task/${taskIds[0]}").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("The task is deleted.", response.content)
             }
 
             handleRequest(HttpMethod.Delete, "/task/${taskIds[1]}").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("The task is deleted.", response.content)
             }
 
             handleRequest(HttpMethod.Get, "/tasks").apply {
@@ -156,7 +152,6 @@ internal class TaskControllerKtTest {
                 setBody(updateTaskRequestBody)
             }.apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("The task is updated.", response.content)
             }
 
             handleRequest(HttpMethod.Get, "/task/${taskIds[0]}").apply {
