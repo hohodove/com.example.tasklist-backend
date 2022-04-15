@@ -65,6 +65,7 @@ fun Route.taskController() {
         val taskId = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
 
         taskUseCase.remove(taskId)
+
         call.respond(HttpStatusCode.OK)
     }
 }
