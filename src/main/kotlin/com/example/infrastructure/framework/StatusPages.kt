@@ -9,6 +9,14 @@ import io.ktor.response.*
 fun Application.configureStatusPages() {
     install(StatusPages) {
 
+        exception<com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException> { cause ->
+            call.respond(
+                HttpStatusCode.BadRequest,
+                ErrorMessageResponse(HttpStatusCode.BadRequest.value.toString(), "Request format is incorrect.")
+            )
+            throw cause
+        }
+
         exception<IllegalArgumentException> { cause ->
             call.respond(
                 HttpStatusCode.BadRequest,
