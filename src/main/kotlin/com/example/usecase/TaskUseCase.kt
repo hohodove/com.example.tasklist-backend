@@ -37,7 +37,7 @@ class TaskUseCase : KoinComponent {
 
         val currentTask = taskId
             ?.let { taskRepository.findById(it) }
-            ?: throw java.lang.IllegalArgumentException("タスクIDが不正です。")
+            ?: throw IllegalArgumentException("The task is not found.")
 
         val changedTaskName = taskUseCaseDto.name
             ?.let { TaskName.valueOf(it) }
