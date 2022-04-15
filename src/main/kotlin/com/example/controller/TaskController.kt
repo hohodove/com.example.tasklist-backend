@@ -21,7 +21,7 @@ fun Route.taskController() {
 
     get("/task/{taskId}") {
         // パスパラメータを指定しないパス(/task/)場合、以下のIllegalArgumentExceptionではなく、404 NotFoundとなる。
-        val pathParameter = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
+        val taskId = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
 
         call.respond(taskUseCase.findById(taskId))
             // 以下は構文の備忘として残している。
@@ -45,11 +45,11 @@ fun Route.taskController() {
 
     put("/task/{taskId}") {
         // パスパラメータを指定しないパス(/task/)場合、以下のIllegalArgumentExceptionではなく、404 NotFoundとなる。
-        val pathParameter = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
+        val taskId = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
 
         val body = call.receive<UpdateTaskRequest>()
         val taskUseCaseDto = TaskUseCaseDto(
-            pathParameter,
+            taskId,
             body.name,
             body.status,
             body.dueDate
@@ -62,9 +62,9 @@ fun Route.taskController() {
 
     delete("/task/{taskId}") {
         // パスパラメータを指定しないパス(/task/)場合、以下のIllegalArgumentExceptionではなく、404 NotFoundとなる。
-        val pathParameter = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
+        val taskId = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
 
-        taskUseCase.remove(pathParameter)
+        taskUseCase.remove(taskId)
         call.respond(HttpStatusCode.OK)
     }
 }
