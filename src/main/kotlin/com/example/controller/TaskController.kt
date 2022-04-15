@@ -23,9 +23,9 @@ fun Route.taskController() {
         // パスパラメータを指定しないパス(/task/)場合、以下のIllegalArgumentExceptionではなく、404 NotFoundとなる。
         val pathParameter = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
 
-        taskUseCase.findById(pathParameter)
-            ?.let { call.respond(it) }
-            ?: call.respond(mapOf("message" to "Not Found."))
+        call.respond(taskUseCase.findById(taskId))
+            // 以下は構文の備忘として残している。
+            // ?: call.respond(mapOf("message" to "Not Found."))
     }
 
     post("/task") {

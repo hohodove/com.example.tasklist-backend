@@ -18,9 +18,10 @@ class TaskUseCase : KoinComponent {
             .map { TaskUseCaseDto.domainToDto(it) }
     }
 
-    fun findById(taskId: String): TaskUseCaseDto? {
+    fun findById(taskId: String): TaskUseCaseDto {
         return taskRepository.findById(TaskId.valueOf(taskId))
             ?.let { TaskUseCaseDto.domainToDto(it) }
+            ?: throw IllegalArgumentException("The task is not found.")
     }
 
     fun create(taskUseCaseDto: TaskUseCaseDto) {
