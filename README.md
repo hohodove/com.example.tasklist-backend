@@ -63,3 +63,28 @@ select * from tasks;
 ./gradlew flywayMigrate -i
 ./gradlew flywayInfo
 ```
+
+### 全タスク取得
+```
+curl localhost:8081/tasks
+```
+
+### タスク取得
+```
+curl localhost:8081/task/a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11
+```
+
+### タスク作成
+```
+curl -X POST -H "Content-Type: application/json" -d '{"name":"タスク３", "duedate":"2100-03-03"}' localhost:8081/task
+```
+
+### タスク更新
+```
+curl -X PUT -H "Content-Type: application/json" -d '{"name":"タスク４"}' localhost:8081/task/5a9e1468-2dc5-4aae-9503-3f3edaa86391
+```
+
+### タスク削除
+```
+curl -X DELETE localhost:8081/task/5a9e1468-2dc5-4aae-9503-3f3edaa86391
+```

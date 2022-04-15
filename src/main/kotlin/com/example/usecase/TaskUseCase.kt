@@ -18,9 +18,10 @@ class TaskUseCase : KoinComponent {
             .map { TaskUseCaseDto.domainToDto(it) }
     }
 
-    fun findById(taskId: String): TaskUseCaseDto? {
+    fun findById(taskId: String): TaskUseCaseDto {
         return taskRepository.findById(TaskId.valueOf(taskId))
             ?.let { TaskUseCaseDto.domainToDto(it) }
+            ?: throw IllegalArgumentException("The task is not found.")
     }
 
     fun create(taskUseCaseDto: TaskUseCaseDto) {
@@ -29,7 +30,11 @@ class TaskUseCase : KoinComponent {
     }
 
     fun remove(taskId: String) {
-        taskRepository.remove(TaskId.valueOf(taskId))
+        val taskId = TaskId.valueOf(taskId)
+
+        taskRepository.findById(taskId)
+            ?.let { taskRepository.remove(taskId) }
+            ?: throw IllegalArgumentException("The task is not found.")
     }
 
     fun update(taskUseCaseDto: TaskUseCaseDto) {
@@ -37,7 +42,7 @@ class TaskUseCase : KoinComponent {
 
         val currentTask = taskId
             ?.let { taskRepository.findById(it) }
-            ?: throw java.lang.IllegalArgumentException("タスクIDが不正です。")
+            ?: throw IllegalArgumentException("The task is not found.")
 
         val changedTaskName = taskUseCaseDto.name
             ?.let { TaskName.valueOf(it) }

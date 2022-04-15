@@ -21,12 +21,22 @@ import java.time.LocalDate
 
 internal class TaskControllerKtTest {
 
+    val mapper = jacksonObjectMapper().findAndRegisterModules()
+
+    @Test
+    fun `全タスク取得エンドポイントについて、全タスク件数が0件の場合、空の配列が返却されること`() {
+        withTestModule {
+            handleRequest(HttpMethod.Get, "/tasks").apply {
+                assertEquals(HttpStatusCode.OK, response.status())
+
+                val findAllTasksResponse = mapper.readValue<List<FindAllTasksResponse>>(response.content!!)
+                assertEquals(0, findAllTasksResponse.size)
+            }
+        }
+    }
+
     @Test
     fun `タスクの作成、取得、削除ができること`() {
-
-        val mapper = jacksonObjectMapper()
-        mapper.findAndRegisterModules()
-
         withTestModule {
 
             handleRequest(HttpMethod.Post, "/task") {
@@ -40,7 +50,6 @@ internal class TaskControllerKtTest {
                 setBody(createTaskJsonBody)
             }.apply {
                     assertEquals(HttpStatusCode.OK, response.status())
-                    assertEquals("The task is created.", response.content)
                 }
 
             handleRequest(HttpMethod.Post, "/task") {
@@ -54,7 +63,6 @@ internal class TaskControllerKtTest {
                 setBody(createTaskJsonBody)
             }.apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("The task is created.", response.content)
             }
 
             val taskIds: List<String>
@@ -77,12 +85,10 @@ internal class TaskControllerKtTest {
 
             handleRequest(HttpMethod.Delete, "/task/${taskIds[0]}").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("The task is deleted.", response.content)
             }
 
             handleRequest(HttpMethod.Delete, "/task/${taskIds[1]}").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("The task is deleted.", response.content)
             }
 
             handleRequest(HttpMethod.Get, "/tasks").apply {
@@ -97,9 +103,6 @@ internal class TaskControllerKtTest {
 
     @Test
     fun `タスク取得時、該当タスクが存在しない場合、存在しない旨のメッセージを返却する`() {
-        val mapper = jacksonObjectMapper()
-        mapper.findAndRegisterModules()
-
         // 何でも良いのでタスクIDを生成。
         val taskId = TaskId.generate()
 
@@ -116,9 +119,6 @@ internal class TaskControllerKtTest {
 
     @Test
     fun `タスクの更新ができること`() {
-        val mapper = jacksonObjectMapper()
-        mapper.findAndRegisterModules()
-
         withTestModule {
 
             handleRequest(HttpMethod.Post, "/task") {
@@ -156,7 +156,6 @@ internal class TaskControllerKtTest {
                 setBody(updateTaskRequestBody)
             }.apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("The task is updated.", response.content)
             }
 
             handleRequest(HttpMethod.Get, "/task/${taskIds[0]}").apply {
