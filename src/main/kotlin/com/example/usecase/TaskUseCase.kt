@@ -30,7 +30,11 @@ class TaskUseCase : KoinComponent {
     }
 
     fun remove(taskId: String) {
-        taskRepository.remove(TaskId.valueOf(taskId))
+        val taskId = TaskId.valueOf(taskId)
+
+        taskRepository.findById(taskId)
+            ?.let { taskRepository.remove(taskId) }
+            ?: throw IllegalArgumentException("The task is not found.")
     }
 
     fun update(taskUseCaseDto: TaskUseCaseDto) {
