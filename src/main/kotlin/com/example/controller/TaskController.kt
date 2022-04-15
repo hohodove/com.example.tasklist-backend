@@ -39,6 +39,7 @@ fun Route.taskController() {
         )
 
         taskUseCase.create(taskUseCaseDto)
+
         call.respond(HttpStatusCode.OK)
     }
 
@@ -55,6 +56,7 @@ fun Route.taskController() {
         )
 
         taskUseCase.update(taskUseCaseDto)
+
         call.respond(HttpStatusCode.OK)
     }
 
