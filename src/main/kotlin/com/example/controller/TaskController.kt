@@ -20,8 +20,11 @@ fun Route.taskController() {
     }
 
     get("/task/{taskId}") {
-        // パスパラメータを指定しないパス(/task/)場合、以下のIllegalArgumentExceptionではなく、404 NotFoundとなる。
-        val taskId = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
+        // パスパラメータを指定しないパス(/task/)場合、以下のIllegalArgumentExceptionではなく、
+        // KtorのRouting機能にて404 NotFoundが返却されるため、taskIdがnullのチェックは不要。
+        // （以下のバリデーション処理は構文の備忘として残しておく）
+        // val pathParameter = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
+        val taskId = call.parameters["taskId"]!!
 
         call.respond(taskUseCase.findById(taskId))
             // 以下は構文の備忘として残している。
@@ -31,7 +34,10 @@ fun Route.taskController() {
     post("/task") {
         val body = call.receive<CreateTaskRequest>()
 
-        requireNotNull(body.name) {"タスク名は必須項目です。"}
+        // リクエストに必須項目が含まれない場合、Jacksonのmapperにてエラーとなるため、
+        // 必須項目のチェックは不要。
+        // 以下は構文の備忘として残している。
+        // requireNotNull(body.name) {"タスク名は必須項目です。"}
 
         val taskUseCaseDto = TaskUseCaseDto(
             name = body.name,
@@ -44,8 +50,9 @@ fun Route.taskController() {
     }
 
     put("/task/{taskId}") {
-        // パスパラメータを指定しないパス(/task/)場合、以下のIllegalArgumentExceptionではなく、404 NotFoundとなる。
-        val taskId = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
+        // パスパラメータを指定しないパス(/task/)場合、以下のIllegalArgumentExceptionではなく、
+        // KtorのRouting機能にて404 NotFoundが返却されるため、taskIdがnullのチェックは不要。
+        val taskId = call.parameters["taskId"]!!
 
         val body = call.receive<UpdateTaskRequest>()
         val taskUseCaseDto = TaskUseCaseDto(
@@ -61,8 +68,9 @@ fun Route.taskController() {
     }
 
     delete("/task/{taskId}") {
-        // パスパラメータを指定しないパス(/task/)場合、以下のIllegalArgumentExceptionではなく、404 NotFoundとなる。
-        val taskId = call.parameters["taskId"] ?: throw IllegalArgumentException("Path parameter is null.")
+        // パスパラメータを指定しないパス(/task/)場合、以下のIllegalArgumentExceptionではなく、
+        // KtorのRouting機能にて404 NotFoundが返却されるため、taskIdがnullのチェックは不要。
+        val taskId = call.parameters["taskId"]!!
 
         taskUseCase.remove(taskId)
 
