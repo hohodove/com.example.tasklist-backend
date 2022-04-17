@@ -107,13 +107,11 @@ internal class TaskControllerKtTest {
         val taskId = TaskId.generate()
 
         withTestModule {
-
-            handleRequest(HttpMethod.Get, "/task/${taskId.value()}").apply {
-                assertEquals(HttpStatusCode.OK, response.status())
-
-                val findTaskByIdResponse = mapper.readValue<ErrorMessageResponse>(response.content!!)
-                assertEquals("Not Found.", findTaskByIdResponse.message)
-            }
+                handleRequest(HttpMethod.Get, "/task/${taskId.value()}").apply {
+                    val response1 = mapper.readValue<ErrorMessageResponse>(response.content!!)
+                    assertEquals(HttpStatusCode.BadRequest.value.toString(), response1.status)
+                    assertEquals("The task is not found.", response1.message)
+                }
         }
     }
 
